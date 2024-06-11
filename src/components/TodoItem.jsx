@@ -1,12 +1,14 @@
+import React from 'react'
+
 import { CrossIcon } from './icons/CrossIcon'
 import { CheckIcon } from './icons/CheckIcon'
 
-const TodoItem = ({ todo, completeTodo, removeTodo }) => {
+const TodoItem = React.forwardRef(({ todo, completeTodo, removeTodo, ...props }, ref) => {
 
   const { id, title, completed } = todo;
 
   return (
-    <article className="border-b-gray-200 dark:border-b-gray-600 dark:bg-gray-800 flex gap-4 p-4 transition-colors duration-500 bg-white border-b">
+    <article {...props} ref={ref} className="border-b-gray-200 dark:border-b-gray-600 dark:bg-gray-800 flex gap-4 p-4 transition-colors duration-500 bg-white border-b">
         <button className="size-5 flex-none" onClick={() => completeTodo(id)} >
           {completed ? 
           <div className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 size-full flex items-center justify-center rounded-full'><CheckIcon /></div>
@@ -16,6 +18,6 @@ const TodoItem = ({ todo, completeTodo, removeTodo }) => {
         <button className="flex-none" onClick={() => removeTodo(id)}><CrossIcon /></button>
     </article>
   )
-}
+})
 
 export default TodoItem
